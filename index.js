@@ -1,7 +1,8 @@
 const cors = require("cors");
 const express = require("express");
 const mongo = require("mongoose");
-const shopRoutes = require("./Routes/routes");
+const user = require("./Routes/routes");
+const verify = require("./Controller/Misc/auth-verify");
 
 const main = (app, mongodbURI) => {
   mongo.connect(
@@ -16,7 +17,7 @@ const main = (app, mongodbURI) => {
   );
   app.use(cors());
   app.use(express.json());
-  app.use("/api/", shopRoutes);
+  app.use("/api/", user);
 
   if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.resolve(__dirname, "FrontEnd", "build")));
@@ -63,19 +64,14 @@ const main = (app, mongodbURI) => {
   });
 };
 
-const app = express();
+// const app = express();
 
-main(app, "mongodb://localhost:27017/users");
-app.listen(2000, (err) => {
-  if (err) {
-    console.log(err);
-  }
-});
+// main(app, "mongodb://localhost:27017/users");
+// app.listen(2000, (err) => {
+//   if (err) {
+//     console.log(err);
+//   }
+// });
 
-const verifyUser = () => {
-  const verify = require("./Controller/Misc/auth-verify");
-  return verify();
-};
-
-module.exports = main;
-module.exports = verifyUser;
+module.exports.main = main;
+module.exports.verifyUser = verify;
