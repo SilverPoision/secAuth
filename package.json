@@ -1,0 +1,45 @@
+{
+  "name": "secauth",
+  "version": "1.0.0",
+  "description": "A simple packege to implement a secure authentication in you node-express app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Silverpoision@github.com/SilverPoision/secAuth.git"
+  },
+  "keywords": [
+    "auth",
+    "authentication",
+    "secure",
+    "security",
+    "login",
+    "signup",
+    "jwt",
+    "token",
+    "crypto",
+    "validation"
+  ],
+  "author": "Piyush Kumar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SilverPoision/secAuth/issues"
+  },
+  "homepage": "https://github.com/SilverPoision/secAuth#readme",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.6",
+    "nodemailer": "^6.7.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
+  }
+}
