@@ -59,7 +59,7 @@ If you are using your own mailBody file then update the `MAIL_PATH` with `../../
 
 ### Full documentation can be find [here](https://documenter.getpostman.com/view/6036498/UVXjJvra).
  
-# Isuues
+# Issues
 
 As this is the first realese of secAuth it might contain some issues and bugs and I am more than happy to hear about them via [github](https://github.com/SilverPoision/secAuth/issues) issues just open a issue and I will surely have a look at the bug/issue.
 
