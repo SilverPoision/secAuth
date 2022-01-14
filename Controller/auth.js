@@ -2,15 +2,14 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
-let mailBody;
 const { catchAsync, AppError } = require("./Misc/errorHandler");
 const User = require("../Models/user");
 require("dotenv").config();
+let mailBody;
 
 try {
   mailBody = require(process.env.MAIL_PATH);
 } catch {
-  console.log("exce");
   mailBody = require("./Misc/mailBody");
 }
 
@@ -85,7 +84,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     });
 
     const mailOption = {
-      from: "silverpoision@gmail.com",
+      from: process.env.EMAIL,
       to: req.body.email,
       subject: "Confirm your Email!!",
       html: mailBody.confirmEmail(process.env.HOST, token),
@@ -204,7 +203,7 @@ exports.forgotSend = catchAsync(async (req, res, next) => {
     });
     const mailOption = {
       from: process.env.EMAIL,
-      to: req.body.email,
+      to: email,
       subject: "Reset your Password!!",
       html: mailBody.reset(process.env.HOST, token),
     };

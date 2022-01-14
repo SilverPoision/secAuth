@@ -65,14 +65,14 @@ const main = (app, mongodbURI) => {
   });
 };
 
-const app = express();
+// const app = express();
 
-main(app, "mongodb://localhost:27017/users");
-app.listen(8000, (err) => {
-  if (err) {
-    console.log(err);
-  }
-});
+// main(app, "mongodb://localhost:27017/users");
+// app.listen(8000, (err) => {
+//   if (err) {
+//     console.log(err);
+//   }
+// });
 
 module.exports.main = main;
 module.exports.verifyUser = verify;
