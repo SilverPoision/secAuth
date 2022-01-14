@@ -38,6 +38,15 @@ exports.nameEditSchema = (data) => {
   return schema.validate(data);
 };
 
+exports.proEditSchema = (data) => {
+  const schema = joi.object({
+    currentpassword: joi.string().min(6).required(),
+    newpassword: joi.string().min(6).required(),
+    confirmnewpassword: joi.string().min(6).required(),
+  });
+  return schema.validate(data);
+};
+
 exports.emailEditSchema = (data) => {
   const schema = joi.object({
     email: joi.string().email().required(),

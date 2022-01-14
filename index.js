@@ -74,5 +74,5 @@ const main = (app, mongodbURI) => {
 //   }
 // });
 
-module.exports.main = main;
+module.exports.init = main;
 module.exports.verifyUser = verify;

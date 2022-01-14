@@ -304,7 +304,6 @@ exports.editProfile = catchAsync(async (req, res, next) => {
     req.body.confirmnewpassword
   ) {
     data = {
-      name: req.body.name,
       currentPassword: req.body.currentpassword,
       newPassword: req.body.newpassword,
       confirmNewPassword: req.body.confirmnewpassword,
@@ -332,7 +331,6 @@ exports.editProfile = catchAsync(async (req, res, next) => {
 
     const salt = await bcrypt.genSalt(12);
     const hash = await bcrypt.hash(data.newPassword, salt);
-    user.name = data.name;
     user.password = hash;
     user.save();
     return res.status(200).send({
@@ -373,6 +371,10 @@ exports.editEmail = catchAsync(async (req, res, next) => {
 
   if (!user) {
     return next(new AppError("No user found!!", 401));
+  }
+
+  if (user.email == req.body.email) {
+    return next(new AppError("Please use a different email!!", 401));
   }
 
   const bc = await bcrypt.compare(req.body.currentpassword, user.password);
