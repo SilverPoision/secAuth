@@ -9,7 +9,7 @@ module.exports = catchAsync(async (req, res, next) => {
     return next(new AppError("No token Provided", 400));
   }
 
-  const verify = jwt.verify(token, "gphgphgphgph");
+  const verify = jwt.verify(token, process.env.JWT_SECRET);
 
   if (!verify) {
     return next(new AppError("Unauthorized", 401));

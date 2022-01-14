@@ -2,9 +2,17 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
-const mailBody = require("./Misc/mailBody");
+let mailBody;
 const { catchAsync, AppError } = require("./Misc/errorHandler");
 const User = require("../Models/user");
+require("dotenv").config();
+
+try {
+  mailBody = require(process.env.MAIL_PATH);
+} catch {
+  console.log("exce");
+  mailBody = require("./Misc/mailBody");
+}
 
 const {
   signupSchema,
@@ -19,8 +27,8 @@ const {
 const transport = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "silverpoision@gmail.com",
-    pass: "Silver@1022",
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD,
   },
 });
 
@@ -34,10 +42,10 @@ exports.signup = catchAsync(async (req, res, next) => {
   if (email) {
     if (!email.emailVerified) {
       const mailOption = {
-        from: "silverpoision@gmail.com",
+        from: process.env.EMAIL,
         to: req.body.email,
         subject: "Confirm your Email!!",
-        html: mailBody.confirmEmail(email.emailToken),
+        html: mailBody.confirmEmail(process.env.HOST, email.emailToken),
       };
       transport.sendMail(mailOption, (err, info) => {
         if (err) {
@@ -80,7 +88,7 @@ exports.signup = catchAsync(async (req, res, next) => {
       from: "silverpoision@gmail.com",
       to: req.body.email,
       subject: "Confirm your Email!!",
-      html: mailBody.confirmEmail(token),
+      html: mailBody.confirmEmail(process.env.HOST, token),
     };
     transport.sendMail(mailOption, (err, info) => {
       if (err) {
@@ -121,7 +129,7 @@ exports.login = catchAsync(async (req, res, next) => {
       verified: user.emailVerified,
       sign: user.admin,
     },
-    "gphgphgphgph",
+    process.env.JWT_SECRET,
     {
       expiresIn: "6h",
     }
@@ -133,7 +141,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   user.sessToken.map((el) => {
     try {
-      verify = jwt.verify(el, "gphgphgphgph");
+      verify = jwt.verify(el, process.env.JWT_SECRET);
       if (verify) {
         filtered.push(el);
       }
@@ -195,10 +203,10 @@ exports.forgotSend = catchAsync(async (req, res, next) => {
       message: "Password reset token sent to email if it exists!",
     });
     const mailOption = {
-      from: "silverpoision@gmail.com",
+      from: process.env.EMAIL,
       to: req.body.email,
       subject: "Reset your Password!!",
-      html: mailBody.confirmEmail(token),
+      html: mailBody.reset(process.env.HOST, token),
     };
     transport.sendMail(mailOption, (err, info) => {
       if (err) {
@@ -382,6 +390,7 @@ exports.editEmail = catchAsync(async (req, res, next) => {
     user.email = req.body.email;
     user.emailVerified = false;
     user.emailToken = token;
+    user.sessToken = undefined;
     user.save();
     res.send({
       success: true,
@@ -390,10 +399,10 @@ exports.editEmail = catchAsync(async (req, res, next) => {
     });
 
     const mailOption = {
-      from: "silverpoision@gmail.com",
+      from: process.env.EMAIL,
       to: req.body.email,
       subject: "Confirm your Email!!",
-      html: mailBody.confirmEmail(token),
+      html: mailBody.confirmEmail(process.env.HOST, token),
     };
     transport.sendMail(mailOption, (err, info) => {
       if (err) {

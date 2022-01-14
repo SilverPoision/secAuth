@@ -3,6 +3,7 @@ const express = require("express");
 const mongo = require("mongoose");
 const user = require("./Routes/routes");
 const verify = require("./Controller/Misc/auth-verify");
+require("dotenv").config();
 
 const main = (app, mongodbURI) => {
   mongo.connect(
@@ -64,14 +65,14 @@ const main = (app, mongodbURI) => {
   });
 };
 
-// const app = express();
+const app = express();
 
-// main(app, "mongodb://localhost:27017/users");
-// app.listen(2000, (err) => {
-//   if (err) {
-//     console.log(err);
-//   }
-// });
+main(app, "mongodb://localhost:27017/users");
+app.listen(8000, (err) => {
+  if (err) {
+    console.log(err);
+  }
+});
 
 module.exports.main = main;
 module.exports.verifyUser = verify;

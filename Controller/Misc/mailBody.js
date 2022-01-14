@@ -1,4 +1,4 @@
-exports.reset = (token) => {
+exports.reset = (host, token) => {
   return `<!DOCTYPE html>
         <html>
         <head>
@@ -191,7 +191,7 @@ exports.reset = (token) => {
                             <table border="0" cellpadding="0" cellspacing="0">
                               <tr>
                                 <td align="center" bgcolor="#1a82e2" style="border-radius: 6px;">
-                                  <a href="${token}" target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Click here to reset your password</a>
+                                  <a href="http://${host}/api/user/verify/${token}" target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Click here to reset your password</a>
                                 </td>
                               </tr>
                             </table>
@@ -206,7 +206,7 @@ exports.reset = (token) => {
                   <tr>
                     <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                       <p style="margin: 0;">If that doesn't work, copy and paste the following link in your browser:</p>
-                      <p style="margin: 0;"><a href="${token}" target="_blank">https://passwordmanager.com/reset/${token}</a></p>
+                      <p style="margin: 0;"><a href="http://${host}/api/user/verify/${token}" target="_blank">http://${host}/api/user/verify/${token}</a></p>
                     </td>
                   </tr>
                   <!-- end copy -->
@@ -271,7 +271,7 @@ exports.reset = (token) => {
         </html>`;
 };
 
-exports.confirmEmail = (token) => {
+exports.confirmEmail = (host, token) => {
   return `<!DOCTYPE html>
       <html>
       <head>
@@ -464,7 +464,7 @@ exports.confirmEmail = (token) => {
                           <table border="0" cellpadding="0" cellspacing="0">
                             <tr>
                               <td align="center" bgcolor="#1a82e2" style="border-radius: 6px;">
-                                <a href="${token}" target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Click here to confirm your Email</a>
+                                <a href="http://${host}/api/user/verify/${token}" target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Click here to confirm your Email</a>
                               </td>
                             </tr>
                           </table>
@@ -479,7 +479,7 @@ exports.confirmEmail = (token) => {
                 <tr>
                   <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                     <p style="margin: 0;">If that doesn't work, copy and paste the following link in your browser:</p>
-                    <p style="margin: 0;"><a href="${token}" target="_blank">https://passwordmanager.com/reset/${token}</a></p>
+                    <p style="margin: 0;"><a href="http://${host}/api/user/verify/${token}" target="_blank">http://${host}/api/user/verify/${token}</a></p>
                   </td>
                 </tr>
                 <!-- end copy -->

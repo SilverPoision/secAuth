@@ -40,6 +40,7 @@
     "nodemailer": "^6.7.2"
   },
   "devDependencies": {
+    "dotenv": "^11.0.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15"
   }
