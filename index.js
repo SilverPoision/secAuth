@@ -4,6 +4,7 @@ const mongo = require("mongoose");
 const user = require("./Routes/routes");
 const verify = require("./Controller/Misc/auth-verify");
 const errorHandler = require("./Controller/Misc/errorHandler");
+const path = require("path");
 require("dotenv").config();
 
 const main = (app, mongodbURI) => {
@@ -56,11 +57,11 @@ const main = (app, mongodbURI) => {
     err.statusCode = err.statusCode || 500;
     err.status = err.status || "error";
 
-    mode = "prod";
+    mode = process.env.NODE_ENV;
 
-    if (mode === "dev") {
+    if (mode === "development") {
       sendErrorDev(err, res);
-    } else if (mode === "prod") {
+    } else {
       sendErrorProd(err, res);
     }
   });
