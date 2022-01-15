@@ -3,6 +3,7 @@ const express = require("express");
 const mongo = require("mongoose");
 const user = require("./Routes/routes");
 const verify = require("./Controller/Misc/auth-verify");
+const errorHandler = require("./Controller/Misc/errorHandler");
 require("dotenv").config();
 
 const main = (app, mongodbURI) => {
@@ -76,3 +77,4 @@ const main = (app, mongodbURI) => {
 
 module.exports.init = main;
 module.exports.verifyUser = verify;
+module.exports.errorHandler = errorHandler;

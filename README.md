@@ -7,7 +7,7 @@ const express = require("express");
 const app = express();
 const secAuth = require("secauth");
 
-secAuth.inti(app, "mongoDB_URL");
+secAuth.init(app, "mongoDB_URL");
 
 app.listen(5000);
 ```
@@ -27,7 +27,9 @@ $ npm install secauth
 # Documentation
 
 ### Update the environment variables
+
 Update all the variables in .env file or in the OS env variables so that the node process can read and use them.
+
 1. `EMAIL` and `PASSWORD` are email and password of you mail server. **Recommended** Use Gmail and turn on less secure apps.
 2. `JWT_SECRET` is the secret key you want to encrypt the jwt token with
 3. `HOST` is the host name that you want to use in the mailbody while sending emails. `Ex: HOST="localhost:8000"`
@@ -36,6 +38,7 @@ Update all the variables in .env file or in the OS env variables so that the nod
 ### Checking if the request is authenticated:
 
 In your routes add this middleware exposed by secauth:
+
 ```js
 const express = require("express");
 const router = express.Router();
@@ -56,9 +59,8 @@ If you want to change the email that is sent everytime the user gets a verificat
 
 If you are using your own mailBody file then update the `MAIL_PATH` with `../../path_to_your_file` because the file that uses that file seats inside 1 level deep in node_modules folder.
 
-
 ### Full documentation can be find [here](https://documenter.getpostman.com/view/6036498/UVXjJvra).
- 
+
 # Issues
 
 As this is the first realese of secAuth it might contain some issues and bugs and I am more than happy to hear about them via [github](https://github.com/SilverPoision/secAuth/issues) issues just open a issue and I will surely have a look at the bug/issue.
@@ -68,4 +70,5 @@ As this is the first realese of secAuth it might contain some issues and bugs an
 [Contributing Guide](https://github.com/SilverPoision/secAuth/blob/main/Contribution.md)
 
 # People
+
 - [@Piyush Kumar](https://twitter.com/silverpoision) is the original author of [SecAuth](https://github.com/SilverPoision/secAuth)
