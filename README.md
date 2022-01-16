@@ -34,20 +34,21 @@ Update all the variables in .env file or in the OS env variables so that the nod
 2. `JWT_SECRET` is the secret key you want to encrypt the jwt token with
 3. `HOST` is the host name that you want to use in the mailbody while sending emails. `Ex: HOST="localhost:8000"`
 4. `MAIL_PATH` set it if you are using your own mailbody file.
-5. `NODE_ENV` set it to handle the errors while in development mode and prodution also. `Ex: NODE_ENV="development" or NODE_ENV="production"
+5. `NODE_ENV` set it to handle the errors while in development mode and prodution also. `Ex: NODE_ENV="development" or NODE_ENV="production"`
 
 ### Checking if the request is authenticated:
 
-In your routes add this middleware exposed by secauth:
+In your routes add the `verifyUser` middleware exposed by secauth and it will validate if the user is authenticated or not and if the user is authenticated it will assign `req.user` to the user variable that contains `ID, NAME, VERIFIED` that can be used to run DB operation on the user.
 
 ```js
 const express = require("express");
 const router = express.Router();
-const secauth = require("secauth");
+const { verifyUser } = require("secauth");
 
-router.get("/path", secauth.verifyUser, (req, res, next) => {
+router.get("/user1", verifyUser, (req, res, next) => {
   return res.send({
-    message: "This is a authenticated route",
+    "message": "This is a private route",
+    "user": req.user,
   });
 });
 
@@ -67,15 +68,15 @@ If you want to add error handlers in your code then you can import the errorHand
 ```js
 const express = require("express");
 const router = express.Router();
-const secauth = require("secauth");
+const { verifyUser } = require("secauth");
 const { AppError, catchAsync } = require("secauth").errorHandler;
 
 router.get(
   "/user1/:id",
-  secauth.verifyUser,
-  catchAsync(async (req, res, next) => {     // The catchasync funtion is imported and used to handle all the asyncronous error.
-    if (req.params.id) {
-      return next(new AppError("Error Message", 401)); //The apperror class is imported and used to throw an error.
+  verifyUser,
+  catchAsync(async (req, res, next) => {
+    if (req.params.id == "true") {
+      return next(new AppError("Error Message", 401));
     }
     return res.send({
       message: "This is a private route",
@@ -85,6 +86,7 @@ router.get(
 );
 
 module.exports = router;
+
 ```
 
 ### Full documentation can be find [here](https://documenter.getpostman.com/view/6036498/UVXjJvra).
