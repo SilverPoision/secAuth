@@ -4,7 +4,6 @@ const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const { catchAsync, AppError } = require("./Misc/errorHandler");
 const User = require("../Models/user");
-require("dotenv").config();
 let mailBody;
 
 try {

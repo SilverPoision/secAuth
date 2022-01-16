@@ -1,6 +1,6 @@
 {
   "name": "secauth",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple packege to implement a secure authentication in you node-express app",
   "main": "index.js",
   "scripts": {
