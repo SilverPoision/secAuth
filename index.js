@@ -4,6 +4,10 @@ const user = require("./Routes/routes");
 const verify = require("./Controller/Misc/auth-verify");
 const errorHandler = require("./Controller/Misc/errorHandler");
 
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
+}
+
 const main = (app, mongodbURI) => {
   app.disable("etag");
 

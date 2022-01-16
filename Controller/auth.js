@@ -6,6 +6,10 @@ const { catchAsync, AppError } = require("./Misc/errorHandler");
 const User = require("../Models/user");
 let mailBody;
 
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
+}
+
 try {
   mailBody = require(process.env.MAIL_PATH);
 } catch {
