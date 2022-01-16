@@ -8,7 +8,6 @@ const path = require("path");
 require("dotenv").config();
 
 const main = (app, mongodbURI) => {
-  // app.disable("x-powered-by");
   app.disable("etag");
 
   mongo.connect(
