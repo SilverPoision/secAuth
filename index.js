@@ -1,10 +1,8 @@
-const cors = require("cors");
 const express = require("express");
 const mongo = require("mongoose");
 const user = require("./Routes/routes");
 const verify = require("./Controller/Misc/auth-verify");
 const errorHandler = require("./Controller/Misc/errorHandler");
-const path = require("path");
 require("dotenv").config();
 
 const main = (app, mongodbURI) => {
