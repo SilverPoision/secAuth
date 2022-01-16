@@ -8,6 +8,9 @@ const path = require("path");
 require("dotenv").config();
 
 const main = (app, mongodbURI) => {
+  // app.disable("x-powered-by");
+  app.disable("etag");
+
   mongo.connect(
     mongodbURI,
     { useNewUrlParser: true, useUnifiedTopology: true },
@@ -18,21 +21,16 @@ const main = (app, mongodbURI) => {
       console.log("Connected to DB");
     }
   );
-  app.use(cors());
   app.use(express.json());
+  app.use(function (req, res, next) {
+    res.header("X-Powered-by", "SecAuth-Express");
+    next();
+  });
   app.use("/api/", user);
 
-  if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.resolve(__dirname, "FrontEnd", "build")));
-
-    app.get("*", (req, res) => {
-      res.sendFile(path.resolve(__dirname, "FrontEnd", "build", "index.html"));
-    });
-  }
-
   //404 error Handler
-  app.use((req, res) => {
-    return res.status(404).send("404 You are on a wrong way!!");
+  app.use((req, res, next) => {
+    return next(new errorHandler.AppError("You are on wrong way!!", 404));
   });
 
   //Error Handler
@@ -57,7 +55,7 @@ const main = (app, mongodbURI) => {
     err.statusCode = err.statusCode || 500;
     err.status = err.status || "error";
 
-    mode = process.env.NODE_ENV;
+    mode = process.env.NODE_ENV || "production";
 
     if (mode === "development") {
       sendErrorDev(err, res);

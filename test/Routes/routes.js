@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const secauth = require("secauth");
+const { verifyUser } = require("secauth");
 const { AppError, catchAsync } = require("secauth").errorHandler;
 
 router.get(
   "/user1/:id",
-  secauth.verifyUser,
+  verifyUser,
   catchAsync(async (req, res, next) => {
-    if (req.params.id) {
+    if (req.params.id == "true") {
       return next(new AppError("Error Message", 401));
     }
     return res.send({
