@@ -34,6 +34,7 @@ Update all the variables in .env file or in the OS env variables so that the nod
 2. `JWT_SECRET` is the secret key you want to encrypt the jwt token with
 3. `HOST` is the host name that you want to use in the mailbody while sending emails. `Ex: HOST="localhost:8000"`
 4. `MAIL_PATH` set it if you are using your own mailbody file.
+5. `NODE_ENV` set it to handle the errors while in development mode and prodution also. `Ex: NODE_ENV="development" or NODE_ENV="production"
 
 ### Checking if the request is authenticated:
 
@@ -58,6 +59,33 @@ module.exports = router;
 If you want to change the email that is sent everytime the user gets a verification email or password reset email then create a file and export two funtions that accepts two arguments that are `token, host` just like in the [file](https://github.com/SilverPoision/secAuth/blob/main/Controller/Misc/mailBody.js) and then update the `MAIL_PATH` variable in the .env file or if on server then add the variable in environment variables and update the value.
 
 If you are using your own mailBody file then update the `MAIL_PATH` with `../../path_to_your_file` because the file that uses that file seats inside 1 level deep in node_modules folder.
+
+### Adding the Error Handler:
+
+If you want to add error handlers in your code then you can import the errorHandler funtion from the secauth lib and use it to properley handle errors and send user a proper message about what happenned.
+
+```js
+const express = require("express");
+const router = express.Router();
+const secauth = require("secauth");
+const { AppError, catchAsync } = require("secauth").errorHandler;
+
+router.get(
+  "/user1/:id",
+  secauth.verifyUser,
+  catchAsync(async (req, res, next) => {     // The catchasync funtion is imported and used to handle all the asyncronous error.
+    if (req.params.id) {
+      return next(new AppError("Error Message", 401)); //The apperror class is imported and used to throw an error.
+    }
+    return res.send({
+      message: "This is a private route",
+      user: req.user,
+    });
+  })
+);
+
+module.exports = router;
+```
 
 ### Full documentation can be find [here](https://documenter.getpostman.com/view/6036498/UVXjJvra).
 
