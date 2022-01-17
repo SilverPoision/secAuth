@@ -244,6 +244,7 @@ exports.forgetValidate = catchAsync(async (req, res, next) => {
   const hash = await bcrypt.hash(req.body.password, salt);
 
   user.password = hash;
+  user.sessToken = undefined;
   user.save();
 
   return res.status(200).send({

@@ -65,15 +65,6 @@ const main = (app, mongodbURI) => {
   });
 };
 
-// const app = express();
-
-// main(app, "mongodb://localhost:27017/users");
-// app.listen(8000, (err) => {
-//   if (err) {
-//     console.log(err);
-//   }
-// });
-
 module.exports.init = main;
 module.exports.verifyUser = verify;
 module.exports.errorHandler = errorHandler;
