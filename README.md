@@ -89,7 +89,7 @@ module.exports = router;
 
 ```
 
-### Full documentation can be find [here](https://documenter.getpostman.com/view/6036498/UVXjJvra).
+### API documentation can be found [here](https://documenter.getpostman.com/view/6036498/UVXjJvra).
 
 # Issues
 
