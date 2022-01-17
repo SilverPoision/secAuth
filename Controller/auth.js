@@ -24,6 +24,7 @@ const {
   proEditSchema,
   nameEditSchema,
   emailEditSchema,
+  deleteSchema,
 } = require("../Models/validate");
 
 const transport = nodemailer.createTransport({
@@ -415,5 +416,37 @@ exports.editEmail = catchAsync(async (req, res, next) => {
       }
       return;
     });
+  });
+});
+
+exports.deleteUser = catchAsync(async (req, res, next) => {
+  const currPass = req.body.currentPassword;
+
+  const { error } = deleteSchema(req.body);
+
+  if (error) {
+    return next(new AppError(error.details[0].message, 401));
+  }
+
+  const user = await User.findOne({ _id: req.user._id });
+
+  if (!user) {
+    return next(new AppError("No user found!!", 401));
+  }
+
+  const bc = await bcrypt.compare(currPass, user.password);
+  if (!bc) {
+    return next(new AppError("You Current password in wronge!!", 401));
+  }
+  let del = await User.findOneAndDelete({ _id: req.user._id });
+
+  if (!del) {
+    return next(new AppError("Something bad happened!", 500));
+  }
+
+  return res.status(200).send({
+    success: true,
+    error: false,
+    message: "User Deleted!",
   });
 });

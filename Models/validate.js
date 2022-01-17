@@ -54,3 +54,10 @@ exports.emailEditSchema = (data) => {
   });
   return schema.validate(data);
 };
+
+exports.deleteSchema = (data) => {
+  const schema = joi.object({
+    currentPassword: joi.string().min(6).required(),
+  });
+  return schema.validate(data);
+};
