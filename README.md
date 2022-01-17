@@ -30,7 +30,7 @@ $ npm install secauth
 
 Update all the variables in .env file or in the OS env variables so that the node process can read and use them.
 
-1. `EMAIL` and `PASSWORD` are email and password of you mail server. **Recommended** Use Gmail and turn on less secure apps.
+1. `EMAIL` and `PASSWORD` are email and password of you mail server. **Recommended:** Use Gmail and turn on less secure apps.
 2. `JWT_SECRET` is the secret key you want to encrypt the jwt token with
 3. `HOST` is the host name that you want to use in the mailbody while sending emails. `Ex: HOST="localhost:8000"`
 4. `MAIL_PATH` set it if you are using your own mailbody file.
@@ -57,9 +57,9 @@ module.exports = router;
 
 ### Changing the Email Body:
 
-If you want to change the email that is sent everytime the user gets a verification email or password reset email then create a file and export two funtions that accepts two arguments that are `token, host` just like in the [file](https://github.com/SilverPoision/secAuth/blob/main/Controller/Misc/mailBody.js) and then update the `MAIL_PATH` variable in the .env file or if on server then add the variable in environment variables and update the value.
+If you want to change the email body that is sent everytime the user gets a verification email or password reset email then create a file and export two funtions that accepts two arguments that are `token, host` just like in the [file](https://github.com/SilverPoision/secAuth/blob/main/Controller/Misc/mailBody.js) and then update the `MAIL_PATH` variable in the .env file or if on server then add the variable in environment variables and update the value.
 
-If you are using your own mailBody file then update the `MAIL_PATH` with `../../path_to_your_file` because the file that uses that file seats inside 1 level deep in node_modules folder.
+If you are using your own mailBody file then update the `MAIL_PATH` with `../../../path_to_your_file` because the file that uses that file seats inside 2 levels deep in node_modules folder.
 
 ### Adding the Error Handler:
 
@@ -93,7 +93,7 @@ module.exports = router;
 
 # Issues
 
-As this is the first realese of secAuth it might contain some issues and bugs and I am more than happy to hear about them via [github](https://github.com/SilverPoision/secAuth/issues) issues just open a issue and I will surely have a look at the bug/issue.
+As this is the first realese of secAuth, it might contain some issues and bugs(I am sure that it has😆) and I will be more than happy(As much happy that I will scream with joy!!) to hear about them via [github](https://github.com/SilverPoision/secAuth/issues) issues. Just open a issue and I will surely have a look at the bug/issue.
 
 # Contribution
 
