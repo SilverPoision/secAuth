@@ -12,19 +12,19 @@ secAuth.init(app, "mongoDB_URL");
 app.listen(5000);
 ```
 
-# Installation
+## Installation
 
 ```
 $ npm install secauth
 ```
 
-# Features
+## Features
 
 - A secure and tested code for the User Authentication
 - Extensively customizable
 - Quick to implement and Ready to be Productionized
 
-# Documentation
+## Documentation
 
 ### The User Model:
 
@@ -136,14 +136,14 @@ module.exports = router;
 
 #### API documentation can be found [here](https://documenter.getpostman.com/view/6036498/UVXjJvra).
 
-# Issues
+## Issues
 
 As this is the first realese of secAuth, it might contain some issues and bugs(I am sure that it has😆) and I will be more than happy(As much happy that I will scream with joy!!) to hear about them via [github](https://github.com/SilverPoision/secAuth/issues) issues. Just open a issue and I will surely have a look at the bug/issue.
 
-# Contribution
+## Contribution
 
 [Contributing Guide](https://github.com/SilverPoision/secAuth/blob/main/Contribution.md)
 
-# People
+## People
 
 - [@Piyush Kumar](https://twitter.com/silverpoision) is the original author of [SecAuth](https://github.com/SilverPoision/secAuth)
