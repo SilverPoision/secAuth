@@ -26,7 +26,52 @@ $ npm install secauth
 
 # Documentation
 
-### Update the environment variables
+### The User Model:
+
+```js
+  name: {
+    type: String,
+    required: true,
+    min: 6,
+    max: 255,
+  },
+  email: {
+    type: String,
+    required: true,
+    min: 6,
+    max: 255,
+  },
+  password: {
+    type: String,
+    required: true,
+    min: 10,
+    max: 525,
+  },
+  resetPasswordToken: {
+    type: String,
+    required: false,
+  },
+  resetPasswordExpires: {
+    type: Date,
+    required: false,
+  },
+  emailVerified: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  emailToken: {
+    type: String,
+  },
+  sessToken: [
+    {
+      type: String,
+      default: null,
+    },
+  ],
+```
+
+### Update the environment variables:
 
 Update all the variables in .env file or in the OS env variables so that the node process can read and use them.
 
@@ -38,7 +83,7 @@ Update all the variables in .env file or in the OS env variables so that the nod
 
 ### Checking if the request is authenticated:
 
-In your routes add the `verifyUser` middleware exposed by secauth and it will validate if the user is authenticated or not and if the user is authenticated it will assign `req.user` to the user variable that contains `ID, NAME, VERIFIED` that can be used to run DB operation on the user.
+In your routes add the `verifyUser` middleware exposed by secauth and it will validate if the user is authenticated or not and if the user is authenticated it will assign `req.user` to the user variable that contains `User` object that can be used to run DB operation on the user.
 
 ```js
 const express = require("express");
