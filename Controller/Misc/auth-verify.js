@@ -19,8 +19,12 @@ module.exports = catchAsync(async (req, res, next) => {
   }
   const user = await User.findOne({ _id: verify._id });
 
+  if (!user) {
+    return next(new AppError("No user found!!", 401));
+  }
+
   if (user.sessToken.indexOf(token) >= 0) {
-    req.user = verify;
+    req.user = user;
     return next();
   } else {
     return next(new AppError("Unauthorized", 401));

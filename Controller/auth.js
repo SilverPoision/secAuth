@@ -164,7 +164,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.logout = catchAsync(async (req, res, next) => {
   const token = req.headers.authorization;
-  let user = await User.findOne({ _id: req.user._id });
+  let user = req.user;
   filtered = [];
   user.sessToken.map((el) => {
     if (el != token) {
@@ -279,16 +279,11 @@ exports.verifyEmail = catchAsync(async (req, res, next) => {
 });
 
 exports.user = catchAsync(async (req, res, next) => {
-  let user = await User.findOne({
-    _id: req.user._id,
-  });
-  if (!user) {
-    return next(new AppError("No user Found!!", 401));
-  }
-  user = {
-    _id: user._id,
-    name: user.name,
-    email: user.email,
+  const user1 = req.user;
+  const user = {
+    _id: user1._id,
+    name: user1.name,
+    email: user1.email,
     emailVerified: user.emailVerified,
   };
 
@@ -303,6 +298,7 @@ exports.editProfile = catchAsync(async (req, res, next) => {
   let data = {
     name: req.body.name,
   };
+  const user = req.user;
   if (
     req.body.currentpassword &&
     req.body.newpassword &&
@@ -322,10 +318,6 @@ exports.editProfile = catchAsync(async (req, res, next) => {
       return next(new AppError("Both Password should match!!", 401));
     }
 
-    const user = await User.findOne({ _id: req.user._id });
-    if (!user) {
-      return next(new AppError("No user found!", 401));
-    }
     const comparePass = await bcrypt.compare(
       data.currentPassword,
       user.password
@@ -343,26 +335,21 @@ exports.editProfile = catchAsync(async (req, res, next) => {
       error: false,
       message: "Profile Updated",
     });
-  }
-  //Validation
-  const { error } = nameEditSchema(req.body);
-  if (error) {
-    return next(new AppError(error.details[0].message), 401);
-  }
+  } else {
+    //Validation
+    const { error } = nameEditSchema(req.body);
+    if (error) {
+      return next(new AppError(error.details[0].message), 401);
+    }
 
-  const user = await User.findOne({ _id: req.user._id });
-
-  if (!user) {
-    return next(new AppError("No user found!!", 401));
+    user.name = data.name;
+    user.save();
+    res.status(200).send({
+      success: true,
+      error: false,
+      message: "Name Updated",
+    });
   }
-
-  user.name = data.name;
-  user.save();
-  res.status(200).send({
-    success: true,
-    error: false,
-    message: "Name Updated",
-  });
 });
 
 exports.editEmail = catchAsync(async (req, res, next) => {
@@ -372,11 +359,7 @@ exports.editEmail = catchAsync(async (req, res, next) => {
     return next(new AppError(error.details[0].message, 401));
   }
   // console.log(bc);
-  const user = await User.findOne({ _id: req.user._id });
-
-  if (!user) {
-    return next(new AppError("No user found!!", 401));
-  }
+  const user = req.user;
 
   if (user.email == req.body.email) {
     return next(new AppError("Please use a different email!!", 401));
@@ -428,13 +411,8 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
     return next(new AppError(error.details[0].message, 401));
   }
 
-  const user = await User.findOne({ _id: req.user._id });
+  const bc = await bcrypt.compare(currPass, req.user.password);
 
-  if (!user) {
-    return next(new AppError("No user found!!", 401));
-  }
-
-  const bc = await bcrypt.compare(currPass, user.password);
   if (!bc) {
     return next(new AppError("You Current password in wronge!!", 401));
   }
