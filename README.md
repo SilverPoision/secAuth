@@ -138,7 +138,7 @@ module.exports = router;
 
 ## Issues
 
-As this is the first realese of secAuth, it might contain some issues and bugs(I am sure that it has😆) and I will be more than happy(As much happy that I will scream with joy!!) to hear about them via [github](https://github.com/SilverPoision/secAuth/issues) issues. Just open a issue and I will surely have a look at the bug/issue.
+As this is the first release of secAuth, it might contain some issues and bugs(I am sure that it has😆) and I will be more than happy(As much happy that I will scream with joy!!) to hear about them (Even a small spelling or grammatical issue will help grow the project) via [github](https://github.com/SilverPoision/secAuth/issues) issues. Just open a issue and I will surely have a look at the bug/issue.
 
 ## Contribution
 
