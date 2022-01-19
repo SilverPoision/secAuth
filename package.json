@@ -30,7 +30,6 @@
   "homepage": "https://github.com/SilverPoision/secAuth#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "express": "^4.17.2",
     "joi": "^17.5.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.6",
@@ -39,6 +38,7 @@
   "devDependencies": {
     "dotenv": "^11.0.0",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "express": "^4.17.2"
   }
 }
