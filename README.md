@@ -21,7 +21,7 @@ $ npm install secauth
 ## Features
 
 - A secure and tested code for the User Authentication
-- Extensively customizable
+- Extensively customisable
 - Quick to implement and Ready to be Productionized
 
 ## Documentation
@@ -76,14 +76,14 @@ $ npm install secauth
 Update all the variables in .env file or in the OS env variables so that the node process can read and use them.
 
 1. `EMAIL` and `PASSWORD` are email and password of you mail server. **Recommended:** Use Gmail and turn on less secure apps.
-2. `JWT_SECRET` is the secret key you want to encrypt the jwt token with
-3. `HOST` is the host name that you want to use in the mailbody while sending emails. `Ex: HOST="localhost:8000"`
-4. `MAIL_PATH` set it if you are using your own mailbody file.
-5. `NODE_ENV` set it to handle the errors while in development mode and prodution also. `Ex: NODE_ENV="development" or NODE_ENV="production"`
+2. `JWT_SECRET` is the secret key you want to encrypt the JWT token with
+3. `HOST` is the host name that you want to use in the mail-body while sending emails. `Ex: HOST="localhost:8000"`
+4. `MAIL_PATH` set it if you are using your own mail-body file.
+5. `NODE_ENV` set it to handle the errors while in development mode and production also. `Ex: NODE_ENV="development" or NODE_ENV="production"`
 
 ### Checking if the request is authenticated:
 
-In your routes add the `verifyUser` middleware exposed by secauth and it will validate if the user is authenticated or not and if the user is authenticated it will assign `req.user` to the user variable that contains `User` object that can be used to run DB operation on the user.
+In your routes add the `verifyUser` middleware exposed by Secauth and it will validate if the user is authenticated or not and if the user is authenticated it will assign `req.user` to the user variable that contains `User` object that can be used to run DB operation on the user.
 
 ```js
 const express = require("express");
@@ -102,13 +102,13 @@ module.exports = router;
 
 ### Changing the Email Body:
 
-If you want to change the email body that is sent everytime the user gets a verification email or password reset email then create a file and export two funtions that accepts two arguments that are `token, host` just like in the [file](https://github.com/SilverPoision/secAuth/blob/main/Controller/Misc/mailBody.js) and then update the `MAIL_PATH` variable in the .env file or if on server then add the variable in environment variables and update the value.
+If you want to change the email body that is sent every-time the user gets a verification email or password reset email then create a file and export two functions that accepts two arguments that are `token, host` just like in the [file](https://github.com/SilverPoision/secAuth/blob/main/Controller/Misc/mailBody.js) and then update the `MAIL_PATH` variable in the .env file or if on server then add the variable in environment variables and update the value.
 
 If you are using your own mailBody file then update the `MAIL_PATH` with `../../../path_to_your_file` because the file that uses that file seats inside 2 levels deep in node_modules folder.
 
 ### Adding the Error Handler:
 
-If you want to add error handlers in your code then you can import the errorHandler funtion from the secauth lib and use it to properley handle errors and send user a proper message about what happenned.
+If you want to add error handlers in your code then you can import the errorHandler function from the Secauth lib and use it to properly handle errors and send user a proper message about what happened.
 
 ```js
 const express = require("express");
@@ -138,7 +138,7 @@ module.exports = router;
 
 ## Issues
 
-As this is the first release of secAuth, it might contain some issues and bugs(I am sure that it has😆) and I will be more than happy(As much happy that I will scream with joy!!) to hear about them (Even a small spelling or grammatical issue will help grow the project) via [github](https://github.com/SilverPoision/secAuth/issues) issues. Just open a issue and I will surely have a look at the bug/issue.
+As this is the first release of secAuth, it might contain some issues and bugs(I am sure that it has😆) and I will be more than happy(As much happy that I will scream with joy!!) to hear about them (Even a small spelling or grammatical issue will help grow the project) via [Github](https://github.com/SilverPoision/secAuth/issues) issues. Just open an issue and I will surely have a look at the bug/issue.
 
 ## Contribution
 
