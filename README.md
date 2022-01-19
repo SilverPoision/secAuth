@@ -1,6 +1,6 @@
 ![SecAuth Logo](Images/logo.png)
 
-SecAuth is a secure implementation of the user authentication model with added best practices for day to day developers needs. SecAuth can be used in your next project to implement the most basic user authentication yet secure than most of the websites there.
+SecAuth is a secure implementation of the user authentication model with added best practices for day to day developers needs. SecAuth can be used in your next Node-Express project to implement the most basic user authentication yet secure than most of the websites there.
 
 ```js
 const express = require("express");
