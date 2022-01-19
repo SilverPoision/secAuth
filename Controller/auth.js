@@ -284,7 +284,7 @@ exports.user = catchAsync(async (req, res, next) => {
     _id: user1._id,
     name: user1.name,
     email: user1.email,
-    emailVerified: user.emailVerified,
+    emailVerified: user1.emailVerified,
   };
 
   res.status(200).send({
