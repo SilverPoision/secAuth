@@ -137,7 +137,7 @@ module.exports = router;
 #### API documentation can be found [here](https://documenter.getpostman.com/view/6036498/UVXjJvra).
 
 ## To-Do's:
-1. Implement various auth providers like Google, Twitter etc.
+- Implement various auth providers like Google, Twitter etc.
 
 ## Issues
 
