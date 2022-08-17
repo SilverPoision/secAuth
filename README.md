@@ -136,6 +136,9 @@ module.exports = router;
 
 #### API documentation can be found [here](https://documenter.getpostman.com/view/6036498/UVXjJvra).
 
+## To-Do's:
+1. Implement various auth providers like Google, Twitter etc.
+
 ## Issues
 
 As this is the first release of secAuth, it might contain some issues and bugs(I am sure that it has😆) and I will be more than happy(As much happy that I will scream with joy!!) to hear about them (Even a small spelling or grammatical issue will help grow the project) via [Github](https://github.com/SilverPoision/secAuth/issues) issues. Just open an issue and I will surely have a look at the bug/issue.
